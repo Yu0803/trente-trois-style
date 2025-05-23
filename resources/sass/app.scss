@@ -1,8 +1,52 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+// @import url('https://fonts.bunny.net/css?family=Nunito');
 
+ @import url("https://fonts.googleapis.com/css?family=Alice");
 // Variables
-@import 'variables';
+// @import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// Custom Styles
+.bg-navy {
+  background-color: #024E82 !important;
+}
+
+
+.page-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.login-form {
+  background: #fff;
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.btn-figma {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 24px;
+  width: 211px;
+  height: 58px;
+
+  background-color: #024E82;
+  color: #FAFAFF;
+  font-family: 'Alice', serif;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 400;
+  border: none;
+  border-radius: 50px;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #023b64;
+  }
+}
