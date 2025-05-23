@@ -1,17 +1,183 @@
-@import 'tailwindcss';
-
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
-
-/* @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-} */
-
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-    font-family: 'Alice' ;
+  font-family: 'Alice', serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  color: #333;
+  background-color: #fff;
+}
+
+/* 共通コンテナクラス：左右幅を揃える */
+.container-wide {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+/* ========== Benefit Section ========== */
+.benefit-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #eee;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.benefit-box {
+  display: flex;
+  align-items: flex-start;
+  max-width: 250px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.benefit-box i,
+.benefit-box img {
+  width: 32px;
+  height: 32px;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.benefit-box strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.benefit-box p {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .benefit-section {
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .benefit-box {
+    max-width: 100%;
+  }
+}
+
+/* ========== Footer Section ========== */
+.footer {
+  background-color: #fff;
+  font-size: 14px;
+  padding-top: 40px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* Newsletter input */
+.newsletter form {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+  max-width: 240px;
+}
+
+.newsletter input[type="email"] {
+  border: none;
+  flex: 1;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  background: none;
+}
+
+.newsletter button {
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 12px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #ddd;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.footer-info {
+  margin: 10px;
+}
+
+.footer-info a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+.footer-icons img {
+  height: 20px;
+  margin-left: 15px;
+}
+
+/* <hr> があれば非表示に */
+hr {
+  display: none;
 }
