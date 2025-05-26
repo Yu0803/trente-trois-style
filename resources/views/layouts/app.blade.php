@@ -16,6 +16,8 @@
 
     <!-- Google Fonts: Alice 5/21-->
     <link href='https://fonts.googleapis.com/css?family=Alice' rel='stylesheet'>
+
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
 
 *{
