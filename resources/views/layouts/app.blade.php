@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +16,8 @@
 
     <!-- Google Fonts: Alice 5/21-->
     <link href='https://fonts.googleapis.com/css?family=Alice' rel='stylesheet'>
+
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
 
 *{
@@ -37,6 +40,7 @@ font-family: 'Alice';
     
 
 </head>
+
 <body>
     <div id="app">
         <div class="page-wrapper">
@@ -78,5 +82,8 @@ font-family: 'Alice';
             @yield('content')
         </main>
     </div>
+    @include('layouts.footer')
+
 </body>
+
 </html>
