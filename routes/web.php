@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Auth\RegisteredUserController;
+use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -9,3 +10,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route for the user registration page (GET: show form, POST: handle registration)
+// Created by CHIAKI SAKAI - handles frontend + backend of register page
+// ユーザー登録ページのルーティング
+// GET: フォーム表示、POST: 登録処理を実行
+// 作成者：CHIAKI SAKAI（フロント＋バック両方対応）
+
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store']);
