@@ -2,13 +2,13 @@
 
 @section('content')
 <!-- Hero Section 5/21-->
-<div class="hero-image d-flex flex-column justify-content-center align-items-center text-white text-center" style="background: url('/images/login-hero.jpg') center center/cover no-repeat; height: 400px;">
+<div class="hero-image d-flex flex-column justify-content-center align-items-center text-white text-center container-wide" style="background: url('/images/login-hero.jpg') center center/cover no-repeat; height: 400px;">
     {{-- <h1 style="font-size: 2.5rem; font-weight: bold;">Log In</h1> --}}
     {{-- <p style="font-size: 1.2rem;">Hi! Welcome back, you’ve been missed.</p> --}}
 </div>
 
 
-<div class="login-form py-5">
+<div class="login-form py-5 container-wide">
   <div class="text-center mb-4">
     <h2 class="fw-bold">Log In</h2>
     <p class="text-muted">Hi! Welcome back, you’ve been missed.</p>
