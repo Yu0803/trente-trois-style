@@ -45,14 +45,14 @@ font-family: 'Alice';
     <div id="app">
         <div class="page-wrapper">
         <!-- 上段ナビ（インフォメーションバー） -->
-<nav class="navbar py-1 bg-navy text-white">
+<nav class="navbar py-1 bg-navy text-white container-wide">
   <div class="container d-flex justify-content-center small">
     FREE SHIPPING & RETURNS ON ALL JAPAN ORDERS
   </div>
 </nav>
 
 <!-- 下段ナビ（ロゴ付きメインナビ） -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom container-wide">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
       <img src="{{ asset('images/logo.png') }}" alt="Logo" height="40" class="me-2">
