@@ -19,3 +19,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
+
+// routes/web.php
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
