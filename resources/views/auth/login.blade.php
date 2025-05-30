@@ -37,8 +37,8 @@
           @enderror
         </div>
 
-        <div class="mb-3 d-flex justify-content-between align-items-center">
-         <button type="submit" class="btn-figma">LOG IN</button>
+        <div class="mb-3 d-flex justify-content-between align-items-center ">
+         <button type="submit" class="btn-figma mx-auto d-block">LOG IN</button>
  
             
           @if (Route::has('password.request'))
