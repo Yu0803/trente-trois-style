@@ -17,7 +17,7 @@
             <img src="/images/dress.jpg" alt="Dress" class="img-fluid">
         </div>
         <div class="col-md-6 d-flex align-items-center">
-            <span>Yu Tmym</span>
+            <span>Fabulous Dress</span>
         </div>
         <div class="col-md-2 d-flex align-items-center justify-content-center">
             <span>1</span>

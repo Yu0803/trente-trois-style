@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 // 新規登録画面表示／登録処理
-// 作成者：CHIAKI SAKAI（フロント＋バック両方対応）
+// 作成者：SAKAI（フロント＋バック両方対応）
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
@@ -59,7 +60,20 @@ Route::get('/payment-success', [OrderController::class, 'showPaymentSuccess'])->
 // ホーム画面（ログイン後などに使用）
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+
+// 仮のカートページ表示用（動作確認のために使用）
+// Temporary cart page for testing order submission
+Route::get('/cart', function () {
+    return view('cart');
+})->name('cart');
+
 // アバウトページ（チーム紹介など）
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+//contact-us
+// Contactページ表示
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+// フォーム送信処理
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
