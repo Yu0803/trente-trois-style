@@ -26,11 +26,11 @@ class OrderController extends Controller
  // 👇 支払い完了ページを表示するメソッド（追加）
     public function showPaymentSuccess()
     {
-        $order = Auth::user()->orders()->latest()->first();
+        // $order = Auth::user()->orders()->latest()->first();
 
-        if (!$order) {
-            return redirect('/')->with('error', '注文履歴が見つかりませんでした。');
-        }
+        // if (!$order) {
+        //     return redirect('/')->with('error', '注文履歴が見つかりませんでした。');
+        // }
 
         // ✅ [5/30] payment-success ページ内の表示用変数を
         //    `$order->items` → `$order->products` に変更しました。
@@ -38,10 +38,12 @@ class OrderController extends Controller
         // 理由：Order モデルが products() というリレーションを持っているため。
         // 中間テーブルに quantity がある構成なので、items() は存在しません。
 
-        return view('payment-success', [
-            'order' => $order,
-            'items' => $order->products,
-        ]);
+        // return view('payment-success', [
+        //     'order' => $order,
+        //     'items' => $order->products,
+        // ]);
+
+        return view('payment-success');
     }
 
      // 👇ここに追加する！！5/30 sakai
