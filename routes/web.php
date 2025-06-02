@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\TopPageController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,3 +28,7 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+//Top page
+Route::get('/', [TopPageController::class, 'index']);
+
