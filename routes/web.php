@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\TopPageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +73,11 @@ Route::get('/cart', function () {
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+//Top page
+Route::get('/', [TopPageController::class, 'index']);
+
+
 
 //contact-us
 // Contactページ表示
