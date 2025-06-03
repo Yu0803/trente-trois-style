@@ -5,5 +5,5 @@
   <input type="hidden" name="items[1][product_id]" value="2">
   <input type="hidden" name="items[1][quantity]" value="1">
 
-  <button type="submit">購入する</button>
+  <button type="submit">Add to cart</button>
 </form>

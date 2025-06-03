@@ -63,3 +63,29 @@
   text-align: center;
   font-size: 14px;
 }
+
+img.img-fluid {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.card img {
+  object-fit: cover;
+  height: 400px;
+}
+
+.btn-figma {
+  margin-top: 16px;
+  padding: 6px 16px;
+  width: auto;
+  height: auto;
+  background-color: #024E82;
+  color: #FAFAFF;
+  font-size: 14px;
+  font-family: 'Alice', serif;
+  border-radius: 30px;
+  text-align: center;
+  display: inline-block;
+}
