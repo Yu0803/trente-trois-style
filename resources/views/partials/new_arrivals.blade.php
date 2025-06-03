@@ -1,29 +1,74 @@
 <div class="container py-5">
     <h2 class="text-center fw-bold mb-4">Discover NEW Arrivals</h2>
     <div class="row row-cols-2 row-cols-md-4 g-4">
-
-        {{-- {{一時的にコード追記}} --}}
-        <p>商品数: {{ $newArrivals->count() }}</p>
-
-        @foreach ($newArrivals as $product)
-            <p>{{ $product->name }} - ${{ $product->price }} - {{ $product->image }}</p>
-        @endforeach
-        {{-- {{一時的にコード追記ここまで}} --}}
-
-
-
-        @foreach ($newArrivals as $product)
+       
             <div class="col">
                 <div class="card h-100 text-center">
-                    <img src="{{ asset('images/products/' . $product->image) }}" class="card-img-top"
-                        alt="{{ $product->name }}">
-                    <div class="card-body">
-                        <h6 class="card-title">{{ $product->name }}</h6>
-                        <p class="text-muted">${{ number_format($product->price, 2) }}</p>
-                    </div>
+                    <img src="{{ asset('images/products/pink_sapphire_ring.png') }}" class="card-img-top"
+                        alt="pink_sapphire_ring">
+                    
+                        
                 </div>
             </div>
-        @endforeach
+
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/pearl_ring.png' ) }}" class="card-img-top"
+                        alt="pearl_ring">
+                    
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/blue_ring.png') }}" class="card-img-top"
+                        alt="blue_ring">
+                    
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/silver_ring.png') }}" class="card-img-top"
+                        alt="silver_ring">
+                    
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/earrings1.png') }}" class="card-img-top"
+                        alt="pink_sapphire_ring">
+                    
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/earrings2.png') }}" class="card-img-top"
+                        alt="pink_sapphire_ring">
+                    
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/earrings3.png') }}" class="card-img-top"
+                        alt="pink_sapphire_ring">
+                    
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/earrings4.png') }}" class="card-img-top"
+                        alt="pink_sapphire_ring">
+                    
+                </div>
+            </div>
+       
     </div>
 </div>
-</section>
+
+
+
+

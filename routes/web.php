@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\TopPageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,8 @@ Route::get('/about', function () {
 
 //Top page
 Route::get('/', [TopPageController::class, 'index']);
+
+
 
 //contact-us
 // Contactページ表示

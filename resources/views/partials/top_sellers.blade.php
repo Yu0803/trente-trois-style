@@ -1,16 +1,40 @@
-<div class="container py-5 bg-light">
+<div class="container py-5">
     <h2 class="text-center fw-bold mb-4">Top Sellers</h2>
-    <div class="row row-cols-2 row-cols-md-5 g-4">
-        @foreach ($topSellers as $product)
-            <div class="col">
+    <div class="row row-cols-2 row-cols-md-4 g-4">
+       
+        <div class="col">
                 <div class="card h-100 text-center">
-                    <img src="{{ asset('images/products/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
-                    <div class="card-body">
-                        <h6 class="card-title">{{ $product->name }}</h6>
-                        <p class="text-muted">${{ number_format($product->price, 2) }}</p>
-                    </div>
+                    <img src="{{ asset('images/products/Green_Bouquet.png') }}" class="card-img-top"
+                        alt="pink_sapphire_ring">
+                   
                 </div>
             </div>
-        @endforeach
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/Pink_Bouquet.png' ) }}" class="card-img-top"
+                        alt="pearl_ring">
+                    
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/Red_Bouquet.png') }}" class="card-img-top"
+                        alt="blue_ring">
+                   
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <img src="{{ asset('images/products/White_Bouquet.png') }}" class="card-img-top"
+                        alt="silver_ring">
+                   
+                </div>
+            </div>
+
     </div>
 </div>
+
+
+
+
+
