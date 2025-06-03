@@ -9,6 +9,7 @@ use App\Http\Controllers\TopPageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,15 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
+// --------------------
+// 商品一覧・詳細ページ
+// --------------------
+Route::get('/products', [ProductController::class, 'index'])->name('products.index'); // 商品一覧ページ
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show'); // 商品詳細ページ
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+
+
 
 // =======================
 // 注文処理・履歴表示
@@ -68,6 +78,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
 // アバウトページ（チーム紹介など）
 Route::get('/about', function () {
