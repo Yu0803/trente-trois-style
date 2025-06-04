@@ -1,9 +1,40 @@
-<form method="POST" action="{{ route('order.store') }}">
-  @csrf
-  <input type="hidden" name="items[0][product_id]" value="1">
-  <input type="hidden" name="items[0][quantity]" value="2">
-  <input type="hidden" name="items[1][product_id]" value="2">
-  <input type="hidden" name="items[1][quantity]" value="1">
+{{-- resources/views/cart.blade.php --}}
+@extends('layouts.app')
 
-  <button type="submit">Add to cart</button>
-</form>
+@section('content')
+<div class="container py-5">
+    <h2 class="mb-4"> Your Shopping Cart 🛒</h2>
+
+    @php $cart = session('cart', []); @endphp
+
+    @if (count($cart) === 0)
+        <p>Your cart is empty.</p>
+    @else
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($cart as $item)
+                    <tr>
+                        <td>{{ $item['product_id'] }}</td>
+                        <td>{{ $item['quantity'] }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <form method="POST" action="{{ route('order.store') }}">
+            @csrf
+            @foreach ($cart as $index => $item)
+                <input type="hidden" name="items[{{ $index }}][product_id]" value="{{ $item['product_id'] }}">
+                <input type="hidden" name="items[{{ $index }}][quantity]" value="{{ $item['quantity'] }}">
+            @endforeach
+            <button type="submit" class="btn-figma">Proceed to Checkout</button>
+        </form>
+    @endif
+</div>
+@endsection
