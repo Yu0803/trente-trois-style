@@ -1,5 +1,7 @@
 <?php
 
+// app/Http/Controllers/CartController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,7 +11,6 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $cart = session()->get('cart', []);
-
         $id = $request->product_id;
         $quantity = $request->quantity;
 
@@ -24,6 +25,11 @@ class CartController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect()->route('cart')->with('success', 'Added to cart successfully!');
+        return redirect()->route('cart')->with('success', 'Added to cart!');
+    }
+
+    public function show()
+    {
+        return view('cart');
     }
 }

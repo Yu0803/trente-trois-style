@@ -77,11 +77,12 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // 仮のカートページ表示用（動作確認のために使用）
 // Temporary cart page for testing order submission
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
-
+// カートに追加
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+
+// カートを表示
+Route::get('/cart', [CartController::class, 'show'])->name('cart');
+
 
 // アバウトページ（チーム紹介など）
 Route::get('/about', function () {
