@@ -5,21 +5,21 @@
     <meta charset="UTF-8">
     <title>Admin Page | Trente-trois style</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Google Fonts: Alice 5/21-->
     <link href='https://fonts.googleapis.com/css?family=Alice' rel='stylesheet'>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    
     <style>
-        * {
-
+        body {
             font-family: 'Alice';
-
         }
     </style>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     {{-- 共通ヘッダー --}}
     <header class="py-3 border-bottom">
@@ -38,6 +38,7 @@
         </div>
     </main>
 
+    {{-- フッター --}}
     <footer class="mt-auto">
         @include('layouts.footer')
     </footer>
