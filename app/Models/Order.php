@@ -9,7 +9,15 @@ use App\Models\User;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'status'];
+    protected $fillable = [
+        'user_id', 
+        'status',
+        'description',
+        'payment_method',
+        'amount',
+        'order_date',
+        'user_id',
+];
     
     public function products()
 {

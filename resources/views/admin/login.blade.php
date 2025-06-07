@@ -3,7 +3,7 @@
 @section('content')
     <div class="container d-flex justify-content-center">
         <div style="width: 100%; max-width: 720px;">
-            <h2 class="text-center mb-4">Admin-<span class="text-primary">log in</span></h2>
+            <h2 class="text-center mb-4">Admin-<span style="#024E82;">log in</span></h2>
 
             <form method="POST" action="{{ route('admin.login.submit') }}" style="max-width: 100%;">
                 @csrf
