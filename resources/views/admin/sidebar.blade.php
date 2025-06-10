@@ -7,11 +7,24 @@
 
     <nav class="mb-4">
         <ul class="list-unstyled">
-            <li><a href="#" class="d-block py-2"><i class="fa-solid fa-box"></i> Order Management</a></li>
-            <li><a href="#" class="d-block py-2"><i class="fa-solid fa-shirt"></i> Product Management</a></li>
-            <li><a href="#" class="d-block py-2"><i class="fa-solid fa-credit-card"></i> Payment Management</a></li>
-            <li><a href="#" class="d-block py-2"><i class="fa-solid fa-user"></i> Customer Management</a></li>
-            <li><a href="#" class="d-block py-2"><i class="fa-solid fa-pen-to-square"></i> Review Management</a></li>
+            <div class="list-group">
+    <a href="{{ route('admin.orders.index') }}" class="list-group-item list-group-item-action">
+        <i class="bi bi-bag-fill me-1"></i> Order Management
+    </a>
+    <a href="{{ route('admin.products.index') }}" class="list-group-item list-group-item-action">
+        <i class="bi bi-shirt me-1"></i> Product Management
+    </a>
+    <a href="{{ route('admin.payments.index') }}" class="list-group-item list-group-item-action">
+        <i class="bi bi-credit-card-2-front-fill me-1"></i> Payment Management
+    </a>
+    <a href="{{ route('admin.customers.index') }}" class="list-group-item list-group-item-action">
+        <i class="bi bi-person-fill me-1"></i> Customer Management
+    </a>
+    <a href="{{ route('admin.reviews.index') }}" class="list-group-item list-group-item-action">
+        <i class="bi bi-pencil-square me-1"></i> Review Management
+    </a>
+</div>
+
         </ul>
     </nav>
 

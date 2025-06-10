@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class AdminProduct extends Model
+{
+    protected $table = 'admin_products';
+
+    protected $fillable = [
+        'name', 'category', 'price', 'description',
+    ];
+}
