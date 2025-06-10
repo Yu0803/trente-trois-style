@@ -1,23 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+<div class="container text-center py-5">
+    <h1 class="fw-bold mb-4" style="font-family: 'Alice', serif; font-size: 2.5rem;">
+        Welcome, {{ Auth::user()->first_name }}!
+    </h1>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <p class="text-muted mb-4" style="font-size: 1.2rem;">
+        Thank you for joining Trente-trois style 🌿<br>
+        We’re happy to have you here.
+    </p>
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
+    <a href="{{ route('products.index') }}" class="btn-figma mt-3 rounded-pill" style="font-size: 1rem;">
+        🛍 Browse Our Collection
+    </a>
 </div>
 @endsection

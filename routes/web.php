@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +41,14 @@ Route::post('/login', [LoginController::class, 'login']);
 // 作成者：SAKAI（フロント＋バック両方対応）
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
-
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
 // --------------------
 // 商品一覧・詳細ページ
 // --------------------
-Route::get('/products', [ProductController::class, 'index'])->name('products.index'); // 商品一覧ページ
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show'); // 商品詳細ページ
+Route::get('/products/{category?}', [ProductController::class, 'index'])->name('products.index');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
@@ -81,6 +84,10 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 // カートを表示
 Route::get('/cart', [CartController::class, 'show'])->name('cart');
 
+Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
+Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+
 
 // アバウトページ（チーム紹介など）
 Route::get('/about', function () {
@@ -97,3 +104,5 @@ Route::get('/', [TopPageController::class, 'index']);
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 // フォーム送信処理
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+
