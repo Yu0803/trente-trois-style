@@ -1,6 +1,6 @@
 <!-- layouts/header.blade.php -->
 <!-- 上段ナビ（インフォメーションバー） -->
-<nav class="navbar py-1text-white container-wide" style="background-color: #024E82">
+<nav class="navbar py-1 text-white " style="background-color: #024E82">
   <div class="container d-flex justify-content-center small">
     FREE SHIPPING & RETURNS ON ALL JAPAN ORDERS
   </div>

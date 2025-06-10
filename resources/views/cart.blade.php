@@ -1,40 +1,50 @@
-{{-- resources/views/cart.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
 <div class="container py-5">
-    <h2 class="mb-4"> Your Shopping Cart 🛒</h2>
+  <h2 class="mb-4 fw-bold">Shopping Cart</h2>
 
-    @php $cart = session('cart', []); @endphp
+  @php
+      $cart = session('cart', []);
+  @endphp
 
-    @if (count($cart) === 0)
-        <p>Your cart is empty.</p>
-    @else
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($cart as $item)
-                    <tr>
-                        <td>{{ $item['product_id'] }}</td>
-                        <td>{{ $item['quantity'] }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+  @if(count($cart) > 0)
+    <table class="table table-bordered align-middle text-center">
+      <thead class="table-light">
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        @php $total = 0; @endphp
+        @foreach ($cart as $item)
+          @php
+            $subtotal = $item['price'] * $item['quantity'];
+            $total += $subtotal;
+          @endphp
+          <tr>
+            <td>{{ $item['name'] ?? 'Unknown Product' }}</td>
+            <td>{{ $item['quantity'] }}</td>
+            <td>${{ number_format($item['price']) }}</td>
+            <td>${{ number_format($subtotal) }}</td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
 
-        <form method="POST" action="{{ route('order.store') }}">
-            @csrf
-            @foreach ($cart as $index => $item)
-                <input type="hidden" name="items[{{ $index }}][product_id]" value="{{ $item['product_id'] }}">
-                <input type="hidden" name="items[{{ $index }}][quantity]" value="{{ $item['quantity'] }}">
-            @endforeach
-            <button type="submit" class="btn-figma">Proceed to Checkout</button>
-        </form>
-    @endif
+    <div class="text-end my-3 fw-bold">
+      Total: ${{ number_format($total) }}
+    </div>
+
+    <div class="text-end">
+      <a href="{{ route('checkout') }}" class="btn btn-primary">Proceed to Checkout</a>
+    </div>
+
+  @else
+    <p>Your cart is currently empty.</p>
+  @endif
 </div>
 @endsection
