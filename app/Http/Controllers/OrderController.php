@@ -26,43 +26,50 @@ class OrderController extends Controller
  // 👇 支払い完了ページを表示するメソッド（追加）
     public function showPaymentSuccess()
     {
-        // $order = Auth::user()->orders()->latest()->first();
+        $user = Auth::user();
+        if (!$user) {
+            return redirect('/login')->with('error','Please log in.');
+        }
 
-        // if (!$order) {
-        //     return redirect('/')->with('error', '注文履歴が見つかりませんでした。');
-        // }
+         $order = Auth::user()->orders()->latest()->first();
 
+         if (!$order) {
+             return redirect('/')->with('error', 'No order history found.');
+         }
         // ✅ [5/30] payment-success ページ内の表示用変数を
         //    `$order->items` → `$order->products` に変更しました。
 
         // 理由：Order モデルが products() というリレーションを持っているため。
         // 中間テーブルに quantity がある構成なので、items() は存在しません。
 
-        // return view('payment-success', [
-        //     'order' => $order,
-        //     'items' => $order->products,
-        // ]);
+         return view('payment-success', [
+             'order' => $order,
+             'items' => $order->products,
+         ]);
 
-        return view('payment-success');
-    }
-
+        }  
      // 👇ここに追加する！！5/30 sakai
     public function store(Request $request)
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
 
-        $order = Order::create([
-            'user_id' => $user->id,
-            'status' => 'pending',
-        ]);
-
-        foreach ($request->items as $item) {
-            $order->products()->attach($item['product_id'], [
-                'quantity' => $item['quantity']
-            ]);
-        }
-
-        return redirect()->route('payment.success');
+    if (!$user) {
+        return redirect('/login')->with('error', 'Please log in.');
     }
+
+    $order = Order::create([
+        'user_id' => $user->id,
+        'status' => 'pending',
+    ]);
+
+    foreach ($request->items as $item) {
+        $order->products()->attach($item['product_id'], [
+            'quantity' => $item['quantity']
+        ]);
+    }
+
+    return redirect()->route('payment.success');
+    }
+
 }
 
