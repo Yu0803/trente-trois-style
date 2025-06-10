@@ -199,3 +199,59 @@ body {
 hr {
   display: none;
 }
+
+
+/* admin page */
+/* public/css/app.css */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.main-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: white;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.logout-btn {
+  padding: 5px 10px;
+  border: 1px solid #aaa;
+  background-color: white;
+  cursor: pointer;
+}
+
+
+.admin-layout {
+  min-height: 100vh;
+}
+
+
+
+main {
+  background-color: #f8f9fa;
+}
+

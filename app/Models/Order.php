@@ -8,9 +8,19 @@ use App\Models\User;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'status'];
+    
 
     // ✅ Add withPivot to get quantity from the pivot table
+    protected $fillable = [
+        'user_id', 
+        'status',
+        'description',
+        'payment_method',
+        'amount',
+        'order_date',
+        'user_id',
+];
+    
     public function products()
     {
         return $this->belongsToMany(Product::class)
