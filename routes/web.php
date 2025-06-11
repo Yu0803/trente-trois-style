@@ -13,6 +13,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\AdminPaymentController;
 
 
 /*
@@ -160,3 +162,48 @@ Route::post('/admin/logout', function () {
     Auth::guard('admin')->logout();
     return redirect('/admin/login');
 })->name('admin.logout');
+
+
+// =======================
+// Admin product management page
+// =======================
+Route::middleware('auth:admin')->prefix('admin')->group(function () {
+    Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index'); 
+
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
+
+    // 編集関連ルート
+    Route::get('/products/{product}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+    Route::put('/products/{product}', [AdminProductController::class, 'update'])->name('admin.products.update');
+    // 削除
+    Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+
+
+    Route::prefix('admin')->middleware('auth:admin')->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');
+    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
+    Route::get('/customers', [CustomerController::class, 'index'])->name('admin.customers.index');
+    Route::get('/reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
+});
+
+
+});
+
+// =======================
+// Admin payment management page
+// =======================
+Route::prefix('admin')->group(function () {
+    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
+});
+
+
+
+
+
+    
+
+
+
+

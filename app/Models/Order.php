@@ -32,4 +32,13 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the payment for the order.
+     */
+    public function payment()
+    {
+        return $this->hasOne(Payment::class); // または hasMany, 注文と支払いの関係による
+    }
 }
+
