@@ -14,6 +14,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\AdminPaymentController;
 
 
 /*
@@ -177,13 +178,21 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
     Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');
-    Route::get('/payments', [PaymentController::class, 'index'])->name('admin.payments.index');
+    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
     Route::get('/customers', [CustomerController::class, 'index'])->name('admin.customers.index');
     Route::get('/reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
 });
 
 
 });
+
+// =======================
+// Admin payment management page
+// =======================
+Route::prefix('admin')->group(function () {
+    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
+});
+
 
 
 
