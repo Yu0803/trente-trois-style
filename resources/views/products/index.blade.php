@@ -16,7 +16,7 @@
           {{-- 商品名・価格 --}}
           <div class="card-body text-center">
             <h5 class="card-title">{{ $product->name }}</h5>
-            <p class="card-text">¥{{ number_format($product->price) }}</p>
+            <p class="card-text">${{ number_format($product->price) }}</p>
             <a href="{{ route('products.show', $product->id) }}" class="btn-figma">View Details</a>
           </div>
         </div>
