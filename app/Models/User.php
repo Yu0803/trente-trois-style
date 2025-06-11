@@ -62,6 +62,14 @@ class User extends Authenticatable
 }
 
 
+/**
+     * Get the payments for the user.
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
 
 
 
