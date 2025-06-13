@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminPaymentController;
+use App\Http\Controllers\Admin\AdminCustomerController;
+
 
 
 /*
@@ -179,7 +181,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');
     Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
-    Route::get('/customers', [CustomerController::class, 'index'])->name('admin.customers.index');
+    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
     Route::get('/reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
 });
 
@@ -192,6 +194,19 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
 });
+
+// =======================
+// Admin customer management page
+// =======================
+Route::prefix('admin')->group(function () {
+    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
+    Route::delete('/customers/{user}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
+});
+
+Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+    Route::resource('customers', \App\Http\Controllers\Admin\AdminCustomerController::class)->except(['create', 'store', 'show']);
+});
+
 
 
 
