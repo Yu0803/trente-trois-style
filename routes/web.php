@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminPaymentController;
 use App\Http\Controllers\Admin\AdminCustomerController;
+use App\Http\Controllers\Admin\ReviewController;
 
 
 
@@ -207,6 +208,13 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::resource('customers', \App\Http\Controllers\Admin\AdminCustomerController::class)->except(['create', 'store', 'show']);
 });
 
+
+// =======================
+// Admin review management page
+// =======================
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
+});
 
 
 

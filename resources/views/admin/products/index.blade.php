@@ -38,7 +38,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $product->name }}</td>
-                                <td>¥{{ number_format($product->price) }}</td>
+                                <td>${{ number_format($product->price) }}</td>
                                 <td>{{ $product->category }}</td>
                                 <td>
                                     {{-- ★ ここに書く！ --}}
