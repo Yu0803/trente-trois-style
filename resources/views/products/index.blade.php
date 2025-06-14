@@ -21,7 +21,18 @@
           </div>
         </div>
       </div>
+      
     @endforeach
   </div>
-</div>
+  {{-- ✅ ページネーションリンクをここに表示 --}}
+  <div class="d-flex justify-content-center mt-4">
+    {{ $products->links('vendor.pagination.custom') }}
+  </div>
+ {{-- ✅ カテゴリ切り替えリンクバーを追加 --}}
+  <div class="d-flex justify-content-center mt-4 mb-5">
+    <a href="{{ route('products.index', ['category' => 'Dress']) }}" class="btn btn-outline-dark rounded-pill mx-2">Dresses</a>
+    <a href="{{ route('products.index', ['category' => 'Accessories']) }}" class="btn btn-outline-dark rounded-pill mx-2">Accessories</a>
+    <a href="{{ route('products.index', ['category' => 'Bags']) }}" class="btn btn-outline-dark rounded-pill mx-2">Bags</a>
+  </div>
 @endsection
+
