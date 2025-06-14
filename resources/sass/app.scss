@@ -85,3 +85,8 @@ img.img-fluid {
   display: inline-block;
 }
 
+.pagination .page-item.active .page-link {
+  background-color: #024E82; /* ← 好きな色に変える！ */
+  border-color: #e0aaff;
+  color: #f5f5dc(252, 252, 251);
+}
