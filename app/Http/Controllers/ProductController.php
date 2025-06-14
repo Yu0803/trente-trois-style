@@ -11,8 +11,8 @@ class ProductController extends Controller
     public function index($category = null)
     {
         $products = $category
-            ? Product::where('category', $category)->get()
-            : Product::all();
+            ? Product::where('category', $category)->paginate(12)
+            : Product::paginate(12);
 
         return view('products.index', compact('products', 'category'));
     }

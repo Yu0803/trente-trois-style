@@ -16,12 +16,23 @@
           {{-- 商品名・価格 --}}
           <div class="card-body text-center">
             <h5 class="card-title">{{ $product->name }}</h5>
-            <p class="card-text">¥{{ number_format($product->price) }}</p>
+            <p class="card-text">${{ number_format($product->price) }}</p>
             <a href="{{ route('products.show', $product->id) }}" class="btn-figma">View Details</a>
           </div>
         </div>
       </div>
+      
     @endforeach
   </div>
-</div>
+  {{-- ✅ ページネーションリンクをここに表示 --}}
+  <div class="d-flex justify-content-center mt-4">
+    {{ $products->links('vendor.pagination.custom') }}
+  </div>
+ {{-- ✅ カテゴリ切り替えリンクバーを追加 --}}
+  <div class="d-flex justify-content-center mt-4 mb-5">
+    <a href="{{ route('products.index', ['category' => 'Dress']) }}" class="btn btn-outline-dark rounded-pill mx-2">Dresses</a>
+    <a href="{{ route('products.index', ['category' => 'Accessories']) }}" class="btn btn-outline-dark rounded-pill mx-2">Accessories</a>
+    <a href="{{ route('products.index', ['category' => 'Bags']) }}" class="btn btn-outline-dark rounded-pill mx-2">Bags</a>
+  </div>
 @endsection
+
