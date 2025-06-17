@@ -58,6 +58,8 @@ Route::get('/home', function () {
 Route::get('/products/{category?}', [ProductController::class, 'index'])->name('products.index');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
+Route::get('/products/bag', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.bag');
+
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
 

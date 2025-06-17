@@ -17,6 +17,14 @@ class ProductController extends Controller
         return view('products.index', compact('products', 'category'));
     }
 
+
+        public function bag()
+    {
+        $products = \App\Models\Product::where('category', 'Bag')->paginate(12);
+        $category = 'Bag';
+        return view('products.index', compact('products', 'category'));
+    }
+
     // 商品の詳細ページ
     public function show($id)
     {

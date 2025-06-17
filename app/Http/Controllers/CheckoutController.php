@@ -9,14 +9,16 @@ class CheckoutController extends Controller
     public function show()
     {
         $cart = session()->get('cart', []);
+        $total = collect($cart)->sum(function ($item) {
+            return $item['price'] * $item['quantity'];
+        });
+
         return view('checkout', compact('cart'));
     }
 
     public function process(Request $request)
     {
-        // ここで支払い処理をシミュレーション
-        session()->forget('cart'); // カートを空にする
-
+        session()->forget('cart');
         return redirect()->route('checkout.success');
     }
 
