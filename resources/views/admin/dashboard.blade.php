@@ -8,7 +8,7 @@
 
         <!-- メインコンテンツ -->
         <main class="flex-grow-1 p-4 bg-light">
-            <h2 class="mb-4">Order Management</h2>
+            <h2 class="mb-4">Dashboard</h2>
 
             <!-- フィルター -->
             <div class="mb-3">

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminPaymentController;
 use App\Http\Controllers\Admin\AdminCustomerController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\AdminOrderController;
 
 
 
@@ -147,15 +148,16 @@ Route::post('/admin/logout', function () {
 })->name('logout'); 
 
 
+
 // =======================
 // Admin各管理ページへの遷移ルート
 // =======================
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/products', [ProductController::class, 'index'])->name('products');
-    Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
-    Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('/products', [AdminProductController::class, 'index'])->name('products');
+    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('payments');
+    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('customers');
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders');
     Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show'); // 詳細ページ用
 });
@@ -167,6 +169,15 @@ Route::post('/admin/logout', function () {
     Auth::guard('admin')->logout();
     return redirect('/admin/login');
 })->name('admin.logout');
+
+
+
+// =======================
+// Admin order management page
+// =======================
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('orders', AdminOrderController::class)->only(['index', 'destroy']);
+});
 
 
 // =======================
@@ -186,7 +197,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
 
 
     Route::prefix('admin')->middleware('auth:admin')->group(function () {
-    Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');
     Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
     Route::get('/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
@@ -222,6 +233,9 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
 });
+
+
+
 
 
 
