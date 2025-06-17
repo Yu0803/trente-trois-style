@@ -255,6 +255,14 @@ main {
   background-color: #f8f9fa;
 }
 
+
+.product-image {
+    height: auto;
+    max-height: 400px; /* 必要に応じて調整可能 */
+    object-fit: cover;
+}
+
+
 .card-img-top {
   height: 450px;
   object-fit: cover;

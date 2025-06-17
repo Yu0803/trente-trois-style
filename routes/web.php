@@ -124,125 +124,41 @@ Route::post('/contact', [ContactController::class, 'submit'])->name('contact.sub
 
 
 // =======================
-// Adminトップページ
+// Adminページ
 // =======================
-Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.submit');
-Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
-
-
-// =======================
-// Adminダッシュボード画面
-// =======================
-Route::middleware('auth:admin')->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+// Admin Login（ログイン前でもアクセス可能なルート）
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 });
 
-
-// =======================
-// Adminログアウト
-// =======================
-Route::post('/admin/logout', function () {
-    Auth::guard('admin')->logout();
-    return redirect('/admin/login');
-})->name('logout'); 
-
-
-
-// =======================
-// Admin各管理ページへの遷移ルート
-// =======================
-Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
+// Admin 認証済みルート
+Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/products', [AdminProductController::class, 'index'])->name('products');
-    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('payments');
-    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('customers');
-    Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders');
-    Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
-    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show'); // 詳細ページ用
-});
 
-// =======================
-// Admin logout page
-// =======================
-Route::post('/admin/logout', function () {
-    Auth::guard('admin')->logout();
-    return redirect('/admin/login');
-})->name('admin.logout');
+    // Product Management
+    Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{product}', [AdminProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 
-
-
-// =======================
-// Admin order management page
-// =======================
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    // Order Management
     Route::resource('orders', AdminOrderController::class)->only(['index', 'destroy']);
+
+    // Payment Management
+    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('payments.index');
+
+    // Customer Management
+    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('customers.index');
+    Route::delete('/customers/{user}', [AdminCustomerController::class, 'destroy'])->name('customers.destroy');
+
+    // Review Management
+    Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-
-
-// =======================
-// Admin product management page
-// =======================
-Route::middleware('auth:admin')->prefix('admin')->group(function () {
-    Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index'); 
-
-    Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
-    Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
-
-    // 編集関連ルート
-    Route::get('/products/{product}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
-    Route::put('/products/{product}', [AdminProductController::class, 'update'])->name('admin.products.update');
-    // 削除
-    Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
-
-
-    Route::prefix('admin')->middleware('auth:admin')->group(function () {
-    Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
-    Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');
-    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
-    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
-    Route::get('/reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
-});
-
-
-});
-
-// =======================
-// Admin payment management page
-// =======================
-Route::prefix('admin')->group(function () {
-    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
-});
-
-// =======================
-// Admin customer management page
-// =======================
-Route::prefix('admin')->group(function () {
-    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
-    Route::delete('/customers/{user}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
-});
-
-Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
-    Route::resource('customers', \App\Http\Controllers\Admin\AdminCustomerController::class)->except(['create', 'store', 'show']);
-});
-
-
-// =======================
-// Admin review management page
-// =======================
-Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
-});
-
-
-
-
-
-
-
-
-    
-
-
-
 
