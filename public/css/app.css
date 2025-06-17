@@ -255,3 +255,11 @@ main {
   background-color: #f8f9fa;
 }
 
+
+.product-image {
+    height: auto;
+    max-height: 400px; /* 必要に応じて調整可能 */
+    object-fit: cover;
+}
+
+

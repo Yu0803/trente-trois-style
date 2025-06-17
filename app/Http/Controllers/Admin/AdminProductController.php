@@ -7,62 +7,91 @@ use App\Models\AdminProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
+
 
 
 class AdminProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all(); // ページネーションするなら → Product::paginate(10);
+        $products = Product::with('categories')->get(); // ← categories を事前読み込み
         return view('admin.products.index', compact('products'));
     }
 
     public function create()
     {
-    return view('admin.products.create');
+        $categories = Category::all();
+        return view('admin.products.create', compact('categories'));
     }
 
 
     public function store(Request $request)
-        {
+    {
+
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'name' => 'required',
+            'description' => 'nullable',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:50000',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
         ]);
 
+
         if ($request->hasFile('image')) {
-        $validated['image'] = $request->file('image')->store('products', 'public'); // ← image に変更
+            $path = $request->file('image')->store('products', 'public');
+            $validated['image'] = $path;
         }
 
+        // 商品を登録
+        $productData = collect($validated)->except('categories')->toArray();
+        $product = Product::create($productData);
 
-        Product::create($validated); // ← Productモデルを使って保存
+        // カテゴリとの関係を保存
+        $product->categories()->attach($validated['categories']);
 
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully!');
-        }
+    }
 
 
     public function edit($id)
     {
-    $product = Product::findOrFail($id);
-    return view('admin.products.edit', compact('product'));
+        $product = Product::findOrFail($id);
+        return view('admin.products.edit', compact('product'));
     }
 
 
     public function destroy(Product $product)
     {
         //画像ファイルが存在するか確認してから削除
-    if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
-        Storage::disk('public')->delete($product->image_path);
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        // 商品データの削除
+        $product->delete();
+
+        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
     }
 
-    // 商品データの削除
-    $product->delete();
+    // 商品データの更新
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'category' => 'required|string|max:255',
+            // 他のバリデーションが必要ならここに追加
+        ]);
 
-    return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
+        $product = Product::findOrFail($id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->category = $request->category;
+        $product->save();
+
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully!');
     }
-
 }
