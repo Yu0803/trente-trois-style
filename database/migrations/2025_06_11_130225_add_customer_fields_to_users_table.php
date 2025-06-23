@@ -15,8 +15,8 @@ return new class extends Migration
                 // $table->string('first_name')->nullable();
                 // $table->string('last_name')->nullable();
                 // $table->string('phone_number')->nullable();
-                $table->string('address1')->nullable();
-                $table->string('address2')->nullable();
+                // $table->string('address1')->nullable();
+                // $table->string('address2')->nullable();
                 // $table->string('postal_code')->nullable();
                 // $table->string('country')->nullable();
                 // $table->enum('status', ['active', 'inactive'])->default('active');
