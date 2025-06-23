@@ -28,13 +28,15 @@
                                         <div class="text-danger small">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <label for="categories" class="form-label">Categories</label>
                                     <select name="categories[]" id="categories" multiple class="form-select">
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
-                                                {{ collect(old('categories'))->contains($category->id) ? 'selected' : '' }}>
+                                                @if (
+                                                    (old('categories') && in_array($category->id, old('categories'))) ||
+                                                        (isset($product) && $product->categories->pluck('id')->contains($category->id))) selected @endif>
                                                 {{ $category->name }}
                                             </option>
                                         @endforeach

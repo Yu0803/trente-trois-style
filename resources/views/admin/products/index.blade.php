@@ -33,7 +33,7 @@
                             <td>{{ $product->id }}</td>
                             <td style="width: 120px;">
                                 @if ($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid"
                                         style="width: 100px; height: 130px; object-fit: contain; display: block; margin: 0 auto;">
                                 @else
                                     <div
@@ -43,7 +43,7 @@
                                 @endif
                             </td>
                             <td>{{ $product->name }}</td>
-                            <td>${{ $product->price }}</td>
+                            <td>${{ number_format($product->price) }}</td>
                             <td>
                                 @foreach ($product->categories as $category)
                                     <span class="badge bg-secondary">{{ $category->name }}</span>
@@ -64,8 +64,16 @@
                             </td>
                         </tr>
                     @endforeach
+
+
                 </tbody>
             </table>
+
+            {{-- ✅ ページネーション --}}
+            <div class="d-flex justify-content-center mt-4">
+                {{ $products->links() }}
+            </div>
+
         </main>
     </div>
 @endsection

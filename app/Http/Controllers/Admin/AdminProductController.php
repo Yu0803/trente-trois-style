@@ -15,7 +15,7 @@ class AdminProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('categories')->get(); // ← categories を事前読み込み
+        $products = Product::with('categories')->paginate(12); // 12件ずつ表示
         return view('admin.products.index', compact('products'));
     }
 
@@ -42,7 +42,7 @@ class AdminProductController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('products', 'public');
-            $validated['image'] = $path;
+            $validated['image'] = $path; 
         }
 
         // 商品を登録
@@ -59,7 +59,8 @@ class AdminProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.products.edit', compact('product'));
+        $categories = Category::all(); 
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
 
@@ -79,19 +80,26 @@ class AdminProductController extends Controller
     // 商品データの更新
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'category' => 'required|string|max:255',
-            // 他のバリデーションが必要ならここに追加
-        ]);
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'stock' => 'required|integer',
+        'description' => 'nullable|string',
+        'categories' => 'required|array',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png',
+    ]);
 
-        $product = Product::findOrFail($id);
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->category = $request->category;
-        $product->save();
+    $product = Product::findOrFail($id);
 
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully!');
+    // 画像がアップロードされた場合のみ処理
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('products', 'public');
+        $validated['image'] = $path;
+    }
+
+    $product->update($validated);
+    $product->categories()->sync($validated['categories']);
+
+    return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
 }

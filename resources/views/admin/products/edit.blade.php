@@ -14,21 +14,30 @@
 
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <form action="{{ route('admin.products.update', $product) }}" method="POST"
+                        <form action="{{ route('admin.products.update', $product->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
+                            <!-- 商品名入力欄 -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Product Name</label>
                                     <input type="text" name="name" class="form-control"
                                         value="{{ old('name', $product->name) }}">
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Category</label>
-                                    <input type="text" name="category" class="form-control"
-                                        value="{{ old('category', $product->category) }}">
+                                
+                                <!-- カテゴリ選択欄-->
+                                <div class="mb-3">
+                                    <label for="categories" class="form-label">Categories</label>
+                                    <select name="categories[]" multiple class="form-control">
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}"
+                                                {{ $product->categories->pluck('id')->contains($category->id) ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
