@@ -57,9 +57,8 @@ Route::get('/home', function () {
 // 商品一覧・詳細ページ
 // --------------------
 Route::get('/products/{category?}', [ProductController::class, 'index'])->name('products.index');
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
-Route::get('/products/bag', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.bag');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
