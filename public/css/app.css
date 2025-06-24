@@ -270,3 +270,42 @@ main {
   width: 100%;
   border-radius: 8px;
 }
+
+a {
+  cursor: pointer;
+}
+
+.navbar a,
+.footer a {
+  cursor: pointer;
+}
+
+.navbar a:hover,
+.footer a:hover {
+  color: #024E82;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.card-video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 5px 5px 0 0;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-text {
+  flex-grow: 1; /* 空白を埋めてボタンを下に押す */
+}
+
+.read-more-btn {
+  margin-top: auto;
+}

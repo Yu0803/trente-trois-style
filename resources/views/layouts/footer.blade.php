@@ -39,34 +39,35 @@
       <div class="footer-column">
         <h4>COMPANY INFO</h4>
         <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Latest Posts</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Shop</a></li>
-          <li><a href="#">Store Location</a></li>
+          <li><a href="{{ route('about') }}">About Us</a></li>
+          <li><a href="{{ route('latest-posts') }}">Latest Posts</a></li>
+          <li><a href="{{ route('blog') }}">Blog</a></li>
+
+          <li><a href="{{ route('contact') }}">Contact Us</a></li>
+          <li><a href="{{ route('products.index') }}">Products</a></li>
+          <li><a href="{{ route('about') }}">Store Location</a></li>
         </ul>
       </div>
 
       <div class="footer-column">
         <h4>HELP LINKS</h4>
         <ul>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">Order Status</a></li>
-          <li><a href="#">Size Guide</a></li>
-          <li><a href="#">Delivery</a></li>
-          <li><a href="#">Shipping Info</a></li>
-          <li><a href="#">FAQ</a></li>
+          <li><a href="{{ route('returns') }}">Returns</a></li>
+          <li><a href="{{ route('order-status') }}">Order Status</a></li>
+          <li><a href="{{ route('size-guide') }}">Size Guide</a></li>
+          <li><a href="{{ route('delivery') }}">Delivery</a></li>
+          <li><a href="{{ route('shipping-info') }}">Shipping Info</a></li>
+          <li><a href="{{ route('faq') }}">FAQ</a></li>
         </ul>
       </div>
 
       <div class="footer-column">
         <h4>USEFUL LINKS</h4>
         <ul>
-          <li><a href="#">Special Offers</a></li>
-          <li><a href="#">Gift Cards</a></li>
-          <li><a href="#">Advertising</a></li>
-          <li><a href="#">Terms of Use</a></li>
+          <li><a href="{{ route('special-offers') }}">Special Offers</a></li>
+          <li><a href="{{ route('gift-cards') }}">Gift Cards</a></li>
+          {{-- <li><a href="{{ route('advertising') }}">Advertising</a></li> --}}
+          <li><a href="{{ route('terms-of-use') }}">Terms of Use</a></li>
         </ul>
       </div>
 

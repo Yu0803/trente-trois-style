@@ -120,7 +120,56 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 // フォーム送信処理
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
+// 最新投稿ページ
+Route::get('/latest-posts', function () {
+    return view('latest-posts');
+})->name('latest-posts');
 
+// ブログページ
+Route::get('/blog', function () {
+    return view('blog');
+})->name('blog');
+
+
+Route::get('/order-status', function () {
+    return view('order-status');
+})->name('order-status');
+
+Route::get('/returns', function () {
+    return view('returns');
+})->name('returns');
+
+Route::get('/size-guide', function () {
+    return view('size-guide');
+})->name('size-guide');
+
+Route::get('/delivery', function () {
+    return view('delivery');
+})->name('delivery');
+
+Route::get('/shipping-info', function () {
+    return view('shipping-info');
+})->name('shipping-info');
+
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
+
+Route::get('/special-offers', function () {
+    return view('special-offers');
+})->name('special-offers');
+
+Route::get('/gift-cards', function () {
+    return view('gift-cards');
+})->name('gift-cards');
+
+Route::get('/advertising', function () {
+    return view('advertising');
+})->name('advertising');
+
+Route::get('/terms-of-use', function () {
+    return view('terms-of-use');
+})->name('terms-of-use');
 
 // =======================
 // Adminページ
