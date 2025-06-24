@@ -1,12 +1,9 @@
-<!-- layouts/header.blade.php -->
-<!-- 上段ナビ（インフォメーションバー） -->
 <nav class="navbar py-1 text-white " style="background-color: #024E82">
   <div class="container d-flex justify-content-center small">
     FREE SHIPPING & RETURNS ON ALL JAPAN ORDERS
   </div>
 </nav>
 
-<!-- 下段ナビ（ロゴ付きメインナビ） -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom container-wide">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
@@ -28,8 +25,28 @@
           <a class="nav-link" href="{{ route('contact') }}">CONTACT US</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('blog') }}">BLOG</a> 
+          <a class="nav-link" href="{{ route('blog') }}">BLOG</a>
         </li>
+
+        @auth
+            <li class="nav-item">
+              <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                @csrf
+                  <button type="submit" class="btn btn-sm btn-dark rounded-pill px-3">
+                    LOGOUT
+                  </button>
+              </form>
+            </li>
+        @endauth
+
+
+
+        @guest
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('login') }}">LOGIN</a>
+        </li>
+        @endguest
+
       </ul>
     </div>
   </div>
