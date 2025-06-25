@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Product;
-use App\Models\Order; 
+use App\Models\Order;
 
 class User extends Authenticatable
 {
@@ -61,12 +61,12 @@ class User extends Authenticatable
     }
 
     public function orders()
-{
-    return $this->hasMany(Order::class);
-}
+    {
+        return $this->hasMany(Order::class);
+    }
 
 
-/**
+    /**
      * Get the payments for the user.
      */
     public function payments()
@@ -74,7 +74,8 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class);
     }
 
-
-
-
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
