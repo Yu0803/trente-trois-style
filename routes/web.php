@@ -16,10 +16,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminPaymentController;
 use App\Http\Controllers\Admin\AdminCustomerController;
-use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\AdminReviewController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\AdminOrderController;
-
-
+use App\Models\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +61,12 @@ Route::get('/products/{category?}', [ProductController::class, 'index'])->name('
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+
+// --------------------
+// 商品一覧・詳細ページ末尾のレビュー
+// --------------------
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
 
 
 
@@ -204,9 +210,13 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::delete('/customers/{user}', [AdminCustomerController::class, 'destroy'])->name('customers.destroy');
 
     // Review Management
-    Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+    // Review Management
+    Route::get('/reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
+    Route::delete('/reviews/{id}', [AdminReviewController::class, 'destroy'])->name('reviews.destroy');
+
+
+
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-
