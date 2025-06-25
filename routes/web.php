@@ -136,6 +136,11 @@ Route::get('/blog', function () {
     return view('blog');
 })->name('blog');
 
+Route::post('/logout', function () {
+    Auth::logout(); // セッション削除
+    return redirect('/'); // ホームへリダイレクト
+})->name('logout');
+
 
 Route::get('/order-status', function () {
     return view('order-status');
