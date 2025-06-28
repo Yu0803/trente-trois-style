@@ -18,7 +18,6 @@
 
 
                         <div class="card-body text-center">
-                            <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">${{ number_format($product->price) }}</p>
 
                             {{-- ✅ 在庫数の表示 --}}

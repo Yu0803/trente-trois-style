@@ -9,21 +9,26 @@ use App\Models\Category;
 class TopPageController extends Controller
 {
     public function index()
-    {
-        // 「new」カテゴリーの商品
-        $newCategory = Category::where('name', 'new')->first();
-        $newArrivals = $newCategory ? $newCategory->products()->take(4)->get() : collect();
+{
+    // 新着商品（カテゴリが「new」の中から新しい順に4件）
+    $newArrivals = Product::whereHas('categories', function ($query) {
+        $query->where('name', 'new');
+    })
+    ->orderBy('created_at', 'desc')
+    ->take(4)
+    ->get();
 
-        // 一番売れている商品を Top Sellers に出す
-        $topProducts = Product::with('categories')
-            ->join('order_product', 'products.id', '=', 'order_product.product_id')
-            ->select('products.*')
-            ->selectRaw('SUM(order_product.quantity) as total_sold')
-            ->groupBy('products.id')
-            ->orderByDesc('total_sold')
-            ->take(3)
-            ->get();
+    // 一番売れている商品を Top Sellers に出す（注文数が多い順に4件）
+    $topProducts = Product::with('categories')
+        ->join('order_product', 'products.id', '=', 'order_product.product_id')
+        ->select('products.*')
+        ->selectRaw('SUM(order_product.quantity) as total_sold')
+        ->groupBy('products.id')
+        ->orderByDesc('total_sold')
+        ->take(4)
+        ->get();
 
-        return view('top', compact('newArrivals', 'topProducts'));
-    }
+    return view('top', compact('newArrivals', 'topProducts'));
+}
+
 }

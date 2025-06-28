@@ -25,9 +25,11 @@ class Product extends Model
     // オーダーとの多対多
     public function orders()
     {
-        // 中間テーブルに timestamps がある場合のみ withTimestamps をつける
-        return $this->belongsToMany(Order::class)->withTimestamps();
+        return $this->belongsToMany(Order::class)
+            ->withPivot('quantity')   // ← 中間テーブルのカラムを取得
+            ->withTimestamps();       // timestampsも必要なら
     }
+
 
     // カテゴリとの多対多
     public function categories()
@@ -40,5 +42,4 @@ class Product extends Model
     {
         return $this->hasMany(Review::class);
     }
-
 }

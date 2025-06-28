@@ -43,7 +43,7 @@
 
                         @forelse($product->reviews as $review)
                             <div class="mb-3 p-3 border rounded bg-light">
-                                <strong>{{ $review->user->name ?? 'Guest' }}</strong><br>
+                                <strong>{{ $review->user->first_name }} {{ $review->user->last_name }}</strong><br>
 
                                 {{-- ★の視覚表示 --}}
                                 <div>
