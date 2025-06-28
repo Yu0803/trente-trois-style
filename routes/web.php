@@ -21,6 +21,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Models\Admin;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -189,6 +190,7 @@ Route::get('/terms-of-use', function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 // Admin 認証済みルート
@@ -222,6 +224,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 
 
 
-    // Logout
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
 });
+
+    
+

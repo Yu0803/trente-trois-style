@@ -34,7 +34,7 @@
         <div class="mb-2 text-center small">admin@gmail.com</div>
         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
-            <button class="btn btn-outline-secondary w-100">Logout</button>
+            <button type="submit" class="btn btn-outline-secondary w-100">Logout</button>
         </form>
     </div>
 </aside>
