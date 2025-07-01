@@ -1,22 +1,33 @@
-<h2 class="text-center mt-5 mb-4">Top Sellers</h2>
-<div class="row justify-content-center">
+<h2 class="text-center mb-4">Top Sellers</h2>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
     @forelse ($topProducts as $product)
-        <div class="col-md-3 mb-4 text-center">
-            <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('images/no-image.png') }}"
-                alt="{{ $product->name }}" class="img-fluid rounded"
-                style="width: 100%; height: 200px; object-fit: contain;">
-            <h5 class="mt-2">{{ $product->name }}</h5>
-            <p>${{ number_format($product->price) }}</p>
-            <p>
-                @if ($product->stock > 0)
-                    Stock: {{ $product->stock }}
-                @else
-                    <span class="text-danger">Out of stock</span>
-                @endif
-            </p>
-            <a href="{{ route('products.show', $product->id) }}" class="btn btn-outline-primary btn-sm">View Details</a>
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <a href="{{ route('products.show', $product->id) }}">
+                    <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('images/no-image.png') }}"
+                        alt="{{ $product->name }}" class="img-fluid rounded product-image"
+                        style="width: 100%; height: 200px; object-fit: contain;">
+                </a>
+
+                <div class="card-body text-center">
+                    <h6 class="card-title">{{ $product->name }}</h6>
+                    <p class="card-text">${{ number_format($product->price, 2) }}</p>
+
+                    {{-- 在庫数の表示 --}}
+                    <p>
+                        @if ($product->stock > 0)
+                            Stock: {{ $product->stock }}
+                        @else
+                            <span class="text-danger">Out of stock</span>
+                        @endif
+                    </p>
+                </div>
+            </div>
         </div>
     @empty
-        <p class="text-center">No top sellers found.</p>
+        <div class="col-12 text-center">
+            <p>No top sellers found.</p>
+        </div>
     @endforelse
 </div>
