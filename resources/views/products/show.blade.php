@@ -27,12 +27,16 @@
 
                         {{-- カート追加フォーム & 商品一覧に戻る --}}
                         <div class="d-flex justify-content-center gap-3 flex-wrap">
-                            <form method="POST" action="{{ route('cart.add') }}">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn-figma">cart🛒 </button>
-                            </form>
+                            @if ($product->stock > 0)
+                                <form method="POST" action="{{ route('cart.add') }}">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn-figma">cart🛒</button>
+                                </form>
+                            @else
+                                <button class="btn btn-secondary btn-figma" disabled>Sold Out</button>
+                            @endif
 
                             <a href="{{ route('products.index', $product->category) }}" class="btn-figma">
                                 ← products list

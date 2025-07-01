@@ -18,8 +18,8 @@ class AdminCustomerController extends Controller
             $query->where(function($q) use ($keyword) {
                 $q->where('first_name', 'like', "%{$keyword}%")
                   ->orWhere('last_name', 'like', "%{$keyword}%")
-                  ->orWhere('email', 'like', "%{$keyword}%")
-                  ->orWhere('status', 'like', "%{$keyword}%");
+                  ->orWhere('email', 'like', "%{$keyword}%");
+                  
             });
         }
 

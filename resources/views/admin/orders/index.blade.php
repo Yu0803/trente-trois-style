@@ -38,7 +38,7 @@
                         <tr>
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->user->first_name }} {{ $order->user->last_name }}</td>
-                            <td>${{ number_format($order->price) }}</td> 
+                            <td>${{ number_format($order->amount) }}</td>
                             <td>
                                 @if ($order->status === 'Shipped')
                                     <span class="badge bg-primary">Shipped</span>
