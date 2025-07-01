@@ -1,8 +1,12 @@
 <!-- サイドバー -->
 <aside class="sidebar p-4 bg-white shadow-sm" style="width: 250px; min-height: 100vh;">
     <div class="mb-4 text-center">
-        
-        <h5>Trente-trois style</h5>
+
+        <h4 class="text-center mt-3 mb-3">
+            <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark">
+                Trente-trois style
+            </a>
+        </h4>
     </div>
 
     <nav class="mb-4">
@@ -17,8 +21,7 @@
                 <a href="{{ route('admin.payments.index') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-credit-card-2-front-fill me-1"></i> Payment Management
                 </a>
-                <a href="{{ route('admin.customers.index') }}"
-                    class="list-group-item list-group-item-action"
+                <a href="{{ route('admin.customers.index') }}" class="list-group-item list-group-item-action"
                     style="white-space: nowrap;">
                     <i class="bi bi-person-fill me-1"></i> Customer Management
                 </a>

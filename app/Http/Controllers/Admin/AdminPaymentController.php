@@ -10,9 +10,14 @@ class AdminPaymentController extends Controller
 {
     public function index()
     {
-        $payments = Payment::with(['user', 'order'])->latest()->paginate(10);
+        $payments = Payment::with([
+            'user',           // 支払者
+            'order.items.product' // 注文の商品と、その商品の詳細（名前など）
+        ])->latest()->paginate(10);
+
         return view('admin.payments.index', compact('payments'));
     }
+
 
     public function show(Payment $payment)
     {
