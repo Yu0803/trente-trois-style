@@ -82,9 +82,9 @@
 
     <div class="footer-bottom">
       <div class="footer-info">
-        <p>© 2020 eCommerce, Made by DeoThemes.</p>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
+        {{-- <p>© 2020 eCommerce, Made by DeoThemes.</p> --}}
+        {{-- <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a> --}}
       </div>
       <div class="footer-icons">
         <img src="{{ asset('images/visa.png') }}" alt="Visa">
