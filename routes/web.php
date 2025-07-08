@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\AdminOrderController;
 use App\Models\Admin;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,13 +71,12 @@ Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store
 
 
 
-
 // =======================
 // 注文処理・履歴表示
 // =======================
 
 // 注文履歴ページ（開発確認用）
-Route::get('/order-history', [OrderController::class, 'history']);
+// Route::get('/order-history', [OrderController::class, 'history']);
 
 // 商品注文保存（購入ボタンからPOST）
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
@@ -91,6 +91,11 @@ Route::get('/payment-success', [OrderController::class, 'showPaymentSuccess'])->
 
 // ホーム画面（ログイン後などに使用）
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//order history ページ
+Route::middleware(['auth'])->group(function () {
+    Route::get('/orders/history', [OrderController::class, 'history'])->name('orders.history');
+});
 
 
 // 仮のカートページ表示用（動作確認のために使用）
@@ -109,6 +114,9 @@ Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
 Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+
+// Order Again → カート追加処理
+Route::post('/cart/order-again', [CartController::class, 'orderAgain'])->name('cart.orderAgain');
 
 
 // アバウトページ（チーム紹介など）

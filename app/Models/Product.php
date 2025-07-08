@@ -26,7 +26,7 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class)
-            ->withPivot('quantity')   // ← 中間テーブルのカラムを取得
+            ->withPivot('quantity', 'price')   // ← 中間テーブルのカラムを取得
             ->withTimestamps();       // timestampsも必要なら
     }
 

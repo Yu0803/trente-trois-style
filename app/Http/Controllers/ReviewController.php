@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 
 class ReviewController extends Controller
 {
@@ -25,4 +26,6 @@ class ReviewController extends Controller
 
         return redirect()->back()->with('success', 'Review posted successfully!');
     }
+
+
 }

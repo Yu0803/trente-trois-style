@@ -24,14 +24,14 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class)
-            ->withPivot('quantity')
+            ->withPivot('quantity', 'price')
             ->withTimestamps();
     }
 
     // ✅ items() は order_items テーブル用（新規追加）
-    public function items()
+    public function orderItems()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(\App\Models\OrderItem::class);
     }
 
     public function user()

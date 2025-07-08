@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/CartController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -34,11 +32,10 @@ class CartController extends Controller
         return redirect()->route('cart')->with('success', 'Added to cart!');
     }
 
-
     public function update(Request $request)
     {
         $productId = $request->input('product_id');
-        $action = $request->input('action'); // 'increase' または 'decrease'
+        $action = $request->input('action');
         $cart = session()->get('cart', []);
 
         if (isset($cart[$productId])) {
@@ -47,7 +44,7 @@ class CartController extends Controller
             } elseif ($action === 'decrease') {
                 $cart[$productId]['quantity']--;
                 if ($cart[$productId]['quantity'] <= 0) {
-                    unset($cart[$productId]); // 数量が0以下になったら削除
+                    unset($cart[$productId]);
                 }
             }
         }
@@ -56,7 +53,6 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Cart updated successfully!');
     }
 
-    
     public function remove(Request $request)
     {
         $productId = $request->input('product_id');
@@ -74,5 +70,32 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
         return view('cart', compact('cart'));
+    }
+
+    // 👇追加された「もう一度注文する」機能
+    public function orderAgain(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $quantity = $request->input('quantity', 1);
+
+        $product = Product::findOrFail($productId);
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] += $quantity;
+        } else {
+            $cart[$productId] = [
+                'product_id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'image' => $product->image,
+                'quantity' => $quantity,
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->route('cart')->with('success', 'Product added to cart.');
     }
 }

@@ -18,10 +18,16 @@ class OrderController extends Controller
 
     public function history()
     {
-        // 開発確認用に全注文を取得
-        $orders = \App\Models\Order::with('products')->get();
+        $user = auth()->user();
+
+        if (!$user) {
+            return redirect('/login')->with('error', 'Please log in.');
+        }
+
+        $orders = $user->orders()->with('products')->get();
         return view('orders.history', compact('orders'));
     }
+
 
     // 👇 支払い完了ページを表示するメソッド（追加）
     public function showPaymentSuccess()
@@ -76,7 +82,8 @@ class OrderController extends Controller
 
             // 注文と紐づけ（中間テーブルに quantity を保存）
             $order->products()->attach($item['product_id'], [
-                'quantity' => $item['quantity']
+                'price' => $item['price'],
+                'quantity' => $item['quantity'],
             ]);
         }
 
