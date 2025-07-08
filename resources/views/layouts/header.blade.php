@@ -29,17 +29,27 @@
                 </li>
 
                 @auth
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-dark rounded-pill px-3">
-                                LOGOUT
-                            </button>
-                        </form>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->first_name }}'s My Page
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            {{-- <li><a class="dropdown-item" href="{{ route('mypage') }}">My Page</a></li> --}}
+                            <li>
+                                <a class="dropdown-item" href="{{ route('orders.history') }}">
+                                    Order History
+                                </a>
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 @endauth
-
-
 
                 @guest
                     <li class="nav-item dropdown">
@@ -47,14 +57,12 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             LOGIN
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                             <li><a class="dropdown-item" href="{{ route('login') }}">User Login</a></li>
                             <li><a class="dropdown-item" href="{{ route('admin.login') }}">Admin Login</a></li>
                         </ul>
                     </li>
                 @endguest
-
-
             </ul>
         </div>
     </div>
