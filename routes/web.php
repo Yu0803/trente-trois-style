@@ -103,20 +103,21 @@ Route::middleware(['auth'])->group(function () {
 // カートに追加
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
-// カートを表示
+// // カートを表示
 Route::get('/cart', [CartController::class, 'show'])->name('cart');
 
-// カートの数量を更新
+// // カートの数量を更新
 Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
 
-// カートから商品を削除
+// // カートから商品を削除
 Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
-Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
+Route::get('/checkout/show', [CheckoutController::class, 'show'])->name('checkout.show');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 
 // Order Again → カート追加処理
 Route::post('/cart/order-again', [CartController::class, 'orderAgain'])->name('cart.orderAgain');
+
 
 
 // アバウトページ（チーム紹介など）

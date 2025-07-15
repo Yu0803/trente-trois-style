@@ -73,7 +73,7 @@ class OrderController extends Controller
 
             // ✅ 在庫チェック
             if ($product->stock < $item['quantity']) {
-                return redirect()->back()->with('error', '在庫が足りません：' . $product->name);
+                return redirect()->back()->with('error', 'Not enough stock available: ' . $product->name);
             }
 
             // ✅ 在庫を減らす

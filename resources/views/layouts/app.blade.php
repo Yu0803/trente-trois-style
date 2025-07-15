@@ -19,14 +19,12 @@
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
+        * {
 
-*{
+            font-family: 'Alice';
 
-font-family: 'Alice';
-
-}
-
-</style>
+        }
+    </style>
 
     <!-- layouts/app.blade.php や layouts/guest.blade.php などに追加 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -36,29 +34,29 @@ font-family: 'Alice';
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    
 
-    
+
+
 
 </head>
 
 
 <body>
-  <div id="app">
-    <div class="page-wrapper">
-      
-      @include('layouts.header') <!-- ✅ ここでヘッダーを読み込み -->
-      
-      <main class="py-0">
-        @yield('content')
-      </main>
+    <div id="app">
+        <div class="page-wrapper">
 
-      @include('layouts.footer') <!-- ✅ フッターも共通で読み込み -->
+            @include('layouts.header') <!-- ✅ ここでヘッダーを読み込み -->
 
+            <main class="py-0">
+                @yield('content')
+            </main>
+
+            @include('layouts.footer') <!-- ✅ フッターも共通で読み込み -->
+
+        </div>
     </div>
-  </div>
 
-  
+    @stack('scripts')
 </body>
 
 </html>

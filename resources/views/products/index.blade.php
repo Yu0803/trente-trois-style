@@ -5,13 +5,14 @@
     <div class="container py-5">
         <h1 class="text-center mb-4">Product List</h1>
 
-        <div class="row g-5 row-cols-1 row-cols-md-3 h-100">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
             @foreach ($products as $product)
-                <div class="col-4">
-                    <div class="card">
+                <div class="col">
+                    <div class="card border-0 shadow-none p-0">
                         <a href="{{ route('products.show', $product->id) }}">
-                            <img src="{{ asset('storage/' . $product->image) }}" class="rounded img-fluid"
-                                alt="{{ $product->name }}">
+                            <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('images/no-image.png') }}"
+                                alt="{{ $product->name }}" class="img-fluid rounded product-image"
+                                style="width: 100%; object-fit: contain;"> {{-- heightを削除し、width: 100%を追加すると、親要素の幅いっぱいに広がる --}}
                         </a>
                         {{-- 商品画像 --}}
                         {{-- 画像の高さを350pxに固定し、object-fitで切り抜き --}}
@@ -19,7 +20,8 @@
 
                         <div class="card-body text-center">
                             <p class="card-text">${{ number_format($product->price) }}</p>
-
+                            {{-- 商品名を表示 --}}
+                            <p class="mb-4">{{ $product->description }}</p>
                             {{-- ✅ 在庫数の表示 --}}
                             <p>
                                 @if ($product->stock > 0)
