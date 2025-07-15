@@ -1,12 +1,10 @@
-<nav class="navbar py-1 text-white " style="background-color: #024E82">
-    <div class="container d-flex justify-content-center small">
-        FREE SHIPPING & RETURNS ON ALL JAPAN ORDERS
-    </div>
-</nav>
+@php
+    $isTop = request()->is('/');
+@endphp
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom container-wide">
+<nav class="navbar navbar-expand-lg fixed-top bg-transparent">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+        <a class="navbar-brand align-items-center {{ $isTop ? 'text-white' : 'text-dark' }}" href="{{ url('/') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" height="40" class="me-2">
             <span class="fw-bold">Trente-trois style</span>
         </a>
@@ -19,28 +17,23 @@
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about') }}">ABOUT US</a>
+                    <a class="nav-link {{ $isTop ? 'text-white' : 'text-dark' }}" href="{{ route('about') }}">ABOUT US</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contact') }}">CONTACT US</a>
+                    <a class="nav-link {{ $isTop ? 'text-white' : 'text-dark' }}" href="{{ route('contact') }}">CONTACT US</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('blog') }}">BLOG</a>
+                    <a class="nav-link {{ $isTop ? 'text-white' : 'text-dark' }}" href="{{ route('blog') }}">BLOG</a>
                 </li>
 
                 @auth
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        <a class="nav-link dropdown-toggle {{ $isTop ? 'text-white' : 'text-dark' }}" href="#" id="userDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->first_name }}'s My Page
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            {{-- <li><a class="dropdown-item" href="{{ route('mypage') }}">My Page</a></li> --}}
-                            <li>
-                                <a class="dropdown-item" href="{{ route('orders.history') }}">
-                                    Order History
-                                </a>
-                            </li>
+                            <li><a class="dropdown-item" href="{{ route('orders.history') }}">Order History</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                     @csrf
@@ -53,7 +46,7 @@
 
                 @guest
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button"
+                        <a class="nav-link dropdown-toggle {{ $isTop ? 'text-white' : 'text-dark' }}" href="#" id="loginDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             LOGIN
                         </a>
