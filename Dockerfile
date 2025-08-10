@@ -16,25 +16,15 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # 作業ディレクトリ
 WORKDIR /app
-
-# プロジェクトのファイルを全部コピー
 COPY . .
-
-# Laravel の依存関係をインストール
 RUN composer install --no-dev --optimize-autoloader
 
-# キャッシュやマイグレーションなど
-# .env が無ければ最小構成を生成してキー発行
-RUN [ -f .env ] || printf "APP_ENV=production\nAPP_DEBUG=false\nDB_CONNECTION=sqlite\nAPP_URL=\nLOG_CHANNEL=stderr\nSESSION_DRIVER=file\nCACHE_DRIVER=file\n" > .env \
- && php artisan key:generate --force
+# Laravel が書き込めるよう権限
+RUN chmod -R 777 storage bootstrap/cache || true
 
-RUN php artisan migrate --force || true
-RUN php artisan storage:link || true
-RUN php artisan config:cache
-RUN php artisan route:cache
+# エントリポイントを登録
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# ポート指定
 EXPOSE 10000
-
-# 起動コマンド
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
+CMD ["/entrypoint.sh"]
