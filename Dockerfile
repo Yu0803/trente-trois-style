@@ -1,7 +1,21 @@
-# PHP 8.2 の公式イメージを使う
+# ---- 1) Frontend assets build (Node) ----
+FROM node:20 AS assets
+WORKDIR /app
+
+# 依存インストール
+COPY package*.json ./
+RUN npm ci
+
+# Vite に必要なファイルだけコピーしてビルド
+COPY vite.config.js ./
+COPY resources ./resources
+COPY public ./public
+RUN npm run build   # => public/build/ に manifest.json など生成
+
+# ---- 2) PHP (Laravel) runtime ----
 FROM php:8.2-cli
 
-# 必要なライブラリをインストール
+# 必要ライブラリ & PHP拡張
 RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
@@ -11,18 +25,21 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
  && docker-php-ext-install zip pdo pdo_sqlite bcmath gd
 
-# Composer をインストール
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# 作業ディレクトリ
+# アプリ
 WORKDIR /app
 COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
-# Laravel が書き込めるよう権限
+# Nodeで作った本番アセットを取り込み
+COPY --from=assets /app/public/build /app/public/build
+
+# Laravel が書けるように
 RUN chmod -R 777 storage bootstrap/cache || true
 
-# エントリポイントを登録
+# Entrypoint
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
