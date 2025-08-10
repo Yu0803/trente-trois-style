@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
     libpng-dev \
+    sqlite3 \
+    libsqlite3-dev \
+    pkg-config \
  && docker-php-ext-install zip pdo pdo_sqlite bcmath gd
 
 # Composer をインストール
