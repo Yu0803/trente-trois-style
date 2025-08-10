@@ -24,7 +24,10 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # キャッシュやマイグレーションなど
-RUN cp .env.example .env && php artisan key:generate --force
+# .env が無ければ最小構成を生成してキー発行
+RUN [ -f .env ] || printf "APP_ENV=production\nAPP_DEBUG=false\nDB_CONNECTION=sqlite\nAPP_URL=\nLOG_CHANNEL=stderr\nSESSION_DRIVER=file\nCACHE_DRIVER=file\n" > .env \
+ && php artisan key:generate --force
+
 RUN php artisan migrate --force || true
 RUN php artisan storage:link || true
 RUN php artisan config:cache
