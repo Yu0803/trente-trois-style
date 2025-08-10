@@ -24,7 +24,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # キャッシュやマイグレーションなど
-RUN php artisan key:generate --force
+RUN cp .env.example .env && php artisan key:generate --force
 RUN php artisan migrate --force || true
 RUN php artisan storage:link || true
 RUN php artisan config:cache
